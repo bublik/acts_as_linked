@@ -1,0 +1,9 @@
+<h1><%=h @sites_category.name %><%= link_to 'Edit', edit_sites_category_path(@sites_category) if is_admin? %></h1>
+<p><%=h @sites_category.description %></p>
+<ul>
+<% @sites_category.friend_sites.each do |site| %>
+  <%= content_tag(:li, link_to(site.description, site.url) ) %>
+<% end %>
+</ul>
+<%= link_to 'Вначало каталога', sites_categories_path %> |
+<%= link_to 'Добавить сайт', new_sites_category_friend_site_path(@sites_category) %>

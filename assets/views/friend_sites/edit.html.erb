@@ -1,0 +1,40 @@
+<h1>Editing friend_site</h1>
+
+<% form_for(@friend_site) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :sites_category_id %><br />
+    <%= f.text_field :sites_category_id %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :button_url %><br />
+    <%= f.text_field :button_url %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :admin_email %><br />
+    <%= f.text_field :admin_email %>
+  </p>
+  <p>
+    <%= f.label :refered_page %><br />
+    <%= f.text_field :refered_page %>
+  </p>
+  <p>
+    <%= f.label :is_active %><br />
+    <%= f.check_box :is_active %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @friend_site %> |
+<%= link_to 'Back', friend_sites_path %>

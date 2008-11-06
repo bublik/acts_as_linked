@@ -1,7 +1,19 @@
-# Optional, but recommended for Rails
-ActionController::Base.send(:include, FriendSitesController)
-ActionController::Base.send(:include, SitesCategoriesController)
-ActionController::Base.view_paths.unshift File.join(directory, 'views')
+
+#ActionController::Base.send(:include, FriendSitesController)
+#ActionController::Base.send(:include, SitesCategoriesController)
+
+models_path = File.join(directory, 'app', 'models')
+$LOAD_PATH << models_path
+Dependencies.load_paths << models_path
+
+
+controller_path = File.join(directory, 'app', 'controllers')
+$LOAD_PATH << controller_path
+Dependencies.load_paths << controller_path
+config.controller_paths << controller_path
+
+
+ActionController::Base.append_view_path File.join(directory, 'views')
 
 # Include this module into views, too.
 ActionController::Base.helper(FriendSitesHelper)

@@ -1,17 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  sites_category_id: 
-  url: MyString
-  button_url: MyString
-  description: MyString
-  admin_email: MyString
+  sites_category: one
+  url: http://MyString
+  button_url: MyString1
+  description: MyString1
+  admin_email: MyString1@com.ua
   refered_page: MyString
-  is_active: false
+  is_active: true
 
 two:
-  sites_category_id: 
-  url: MyString
+  sites_category: tu
+  url: http://MyString
   button_url: MyString
   description: MyString
   admin_email: MyString

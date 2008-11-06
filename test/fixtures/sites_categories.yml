@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  identifier: MyString
+  identifier: MyString1
   description: MyText
 
 two:
-  name: MyString
-  identifier: MyString
-  description: MyText
+  name: MyString2
+  identifier: MyString2
+  description: MyText2

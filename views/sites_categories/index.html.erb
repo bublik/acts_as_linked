@@ -6,9 +6,8 @@
       <div><%=h sites_category.description %></div>
       <% if is_admin? %>
       <div><%= link_to 'Edit', edit_sites_category_path(sites_category) %>
-      <%= link_to 'Destroy', sites_category, :confirm => 'Are you sure?', :method => :delete %></div>
+      <%= link_to('Destroy', sites_category, :confirm => 'Are you sure?', :method => :delete) if sites_category.friend_sites.empty? %></div>
       <% end %>
-
     </li>
   <% end %>
 </ul>

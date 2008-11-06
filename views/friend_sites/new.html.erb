@@ -1,8 +1,10 @@
-<h1>Новый ресурс</h1>
+<h3>Добавление ресурса в раздел (<%= @category.name %>)</h3>
 <div style="font-size: 80%">
   Перед добавлением сайта в каталог <b>разместите на своем сайте нашу кнопку или ссылку</b>.
   <div>
-  <textarea rows="3" cols="40"><%= link_to(image_tag("http://#{SITE_DOMAIN}/images/site_button.gif", :alt => SITE_TITLE)+' '+SITE_TITLE, "http://#{SITE_DOMAIN}", :title => SITE_TITLE) +' ' + SITE_DESCRIPTION %></textarea>
+    <textarea rows="4" cols="50">
+<%= render :partial => '/friend_sites/linked_text' %>
+    </textarea>
   </div>
   Все сайты проверяются в ручном режиме при добавлении и периодически проверяется наличие <br/>
   ссылки на вашем ресурсе, в видимой части для роботов.
@@ -12,27 +14,28 @@
 </div>
 
 <% form_for([@category,@friend_site]) do |f| %>
-  <%= f.error_messages %>
+  <%= f.error_messages:header_message => 'Возникли некоторые ошибки при добавлении сайта.',
+    :message => 'Для продолжения исправьте следующие ошибки.' %>
   <p>
     URL сайта<br />
-    <%= f.text_field :url %>
+    <%= f.text_field :url, :size => 45 %>
   </p>
   <p>
     Ссылка на картинку вашей кнопки<br/>
     <span style="font-size: 70%">width=88 height=31</span><br/>
-    <%= f.text_field :button_url %>
+    <%= f.text_field :button_url, :size => 45 %>
   </p>
   <p>
     Краткое описание<br />
-    <%= f.text_area :description, :cols => 40, :rows => 3 %>
+    <%= f.text_area :description, :cols => 50, :rows => 5 %>
   </p>
   <p>
     Емайл адрес администратора<br />
-    <%= f.text_field :admin_email %>
+    <%= f.text_field :admin_email, :size => 45 %>
   </p>
   <p>
     Страница с нашей ссылкой<br />
-    <%= f.text_field :refered_page %>
+    <%= f.text_field :refered_page, :size => 45 %>
   </p>
   <p>
     <%= f.submit 'Добавить' %>
@@ -41,4 +44,4 @@
   Разместите ссылку на своем ресурсе и отправьте все данные администрации.
 <% end %>
 
-<%= link_to 'Back', sites_category_friend_sites_path(@category) %>
+<%= link_to 'Назад', sites_category_friend_sites_path(@category) %>

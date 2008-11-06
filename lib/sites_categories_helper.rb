@@ -1,5 +1,3 @@
 module SitesCategoriesHelper
-  def is_admin?
-    true
-  end
+  include ApplicationHelper
 end

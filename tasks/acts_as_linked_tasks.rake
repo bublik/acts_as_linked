@@ -1,4 +1,1 @@
-# desc "Explaining what the task does"
-# task :acts_as_linked do
-#   # Task goes here
-# end
+require File.join(File.dirname(__FILE__), 'acts_as_linked_tasks')

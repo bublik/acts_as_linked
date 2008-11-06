@@ -1,13 +1,45 @@
 ActsAsLinked
 ============
-
-Introduction goes here.
+Links exchange system for thematicks sites with youe site.
+All questions send to my forum http://rubyclub.com.ua/
 
 
 Example
 =======
+Add next line to your routes.rb file
+map.resources :sites_categories, :has_many => :friend_sites
 
-Example goes here.
+Add method +is_admin?+
+to your application_helper.rb
+for manage links categories [CRUD]
+
+Add to your application_helper.rb methos for create exchange link
++site_title+
++site_description+
+
+Run migrate for create tables [Sites, FriendSites] in your database
+rake linked:migrate_down
+rake linked:migrate_up
+
+Add Sites Catalog link your views
+<%= link_to('Sites catalog', sites_categories_path) %>
+
+On default plugin used layout
+layout 'index'
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+
+OR override
+app/views/friend_sites/_linked_text.html.erb
+add to file your link information
+
+
+Requirenments
+============
+will_paginate
+hpricot
+
+
+=========
+Copyright (c) 2008 [Voloshin Ruslan], released under the MIT license
+Visit to my forum http://rubyclub.com.ua/

@@ -1,7 +1,15 @@
-require 'hpricot'
-require 'net/http'
-require 'uri'
+# == Columns ==
+#t.references :sites_category
+#t.string :url, :null => false
+#t.string :button_url, :null => true
+#t.string :description, :default => nil
+#t.string :admin_email, :null => false
+#t.string :refered_page, :default => nil
+#t.boolean :is_active, :default => false
 
+#require 'hpricot'
+#require 'net/http'
+#require 'uri'
 class FriendSite < ActiveRecord::Base
   belongs_to :sites_category
  

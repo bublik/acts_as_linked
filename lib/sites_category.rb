@@ -1,3 +1,7 @@
+#t.string :name
+#t.string :identifier, :null => false
+#t.text :description
+
 class SitesCategory < ActiveRecord::Base
   has_many :friend_sites
   

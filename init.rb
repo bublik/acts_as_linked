@@ -1,3 +1,6 @@
+require 'hpricot'
+require 'net/http'
+require 'uri'
 
 #ActionController::Base.send(:include, FriendSitesController)
 #ActionController::Base.send(:include, SitesCategoriesController)

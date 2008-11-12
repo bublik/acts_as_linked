@@ -103,8 +103,28 @@ class FriendSitesController < ApplicationController
 
     @friend_site.update_attribute('is_active', params[:state].eql?('activate'))    
     respond_to do |format|
-      flash[:notice] = "Сайт - #{params[:state]}"
+      flash[:notice] = "Акивация сайта - #{@friend_site.is_active}"
       format.html { redirect_to(sites_category_path(@friend_site.sites_category_id)) }
+    end
+  end
+  
+  def remote_validation
+    flash[:notice] = ''
+    unless is_admin?
+      flash[:notice] = 'У вас нет прав!'
+      redirect_to('/')
+      return
+    end
+    @friend_site.remote_validation
+    if @friend_site.errors.empty?
+      flash[:notice] = 'Сайт активирован.'
+    else
+      @friend_site.errors.each_full {|msg| flash[:notice] += msg + "<br/>"}
+    end
+    @friend_site.save
+    respond_to do |format|
+      #    format.html { redirect_to(sites_category_path(@category)) }
+      format.js
     end
   end
   

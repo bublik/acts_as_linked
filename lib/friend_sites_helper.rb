@@ -18,9 +18,10 @@ module FriendSitesHelper
 
   def manage_site_links(site)
     st = (site.is_active ? 'deactivate' : 'activate')
-     resp = link_to(st, friend_site_activate_path(site, st)) +  
-      ' | ' + link_to('edit', edit_sites_category_friend_site_path(site.sites_category_id, site)) +
-      ' | ' + link_to('destroy', sites_category_friend_site_path(site.sites_category_id, site), :confirm => 'Are you sure?', :method => :delete ) 
+     resp = link_to(st, friend_site_activate_path(site, st)) + 
+      ' | ' + link_to_remote('пров.', :url => friend_site_remote_validation_path(site)) +
+      ' | ' + link_to('ред.', edit_sites_category_friend_site_path(site.sites_category_id, site)) +
+      ' | ' + link_to('удал.', sites_category_friend_site_path(site.sites_category_id, site), :confirm => 'Are you sure?', :method => :delete ) 
    content_tag(:div, "#{site.admin_email}  [#{resp}] #{site.refered_page}")
   end
 

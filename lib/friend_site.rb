@@ -40,25 +40,27 @@ class FriendSite < ActiveRecord::Base
  
   def validate_on_create
     if self.errors.empty?
-      if self.refered_page.scan(self.url)
-        #skip remote validation if set this flag
-        return true unless remote_check
-
-        links = Link.new
-        links.set_page(self.refered_page)
-        links.link_initialize
-        logger.debug(links.ext_links.inspect)
-        links.ext_links.each do |url|
-          return true if url.scan(SITE_DOMAIN)
-        end
-        
-        self.errors.add_to_base('На указанной Вами странице обратной ссылки не найдено.')
-      else
-        self.errors.add_to_base('Ссылка нанаш русурс размещена на чужом сайте.')
-      end
+      #skip remote validation if set this flag
+      return true unless remote_check 
+      remote_validation
     end
   end
-
+  
+  def remote_validation
+    if self.refered_page.scan(self.url)
+      links = Link.new
+      links.set_page(self.refered_page)
+      links.link_initialize
+      logger.debug(links.ext_links.inspect)
+      links.ext_links.each do |url|
+        return self.is_active = true if url.scan(SITE_DOMAIN)
+      end
+      self.errors.add_to_base('На указанной Вами странице обратной ссылки не найдено.')
+    else
+      self.errors.add_to_base('Ссылка нанаш русурс размещена на чужом сайте.')
+    end
+    self.is_active = false
+  end
 
   class Link
     attr_accessor :site, :indexed_links, :int_links, :ext_links

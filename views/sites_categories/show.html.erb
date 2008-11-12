@@ -6,7 +6,7 @@
 <% end %>
 <ul  style="list-style-image:none; list-style-position:outside; list-style-type:none;">
 <%= @sites.collect do |site|
-  content_tag(:li, site_row(site), :id => site.id)
+  content_tag(:li, site_row(site), :id => "site_#{site.id}")
 end %>
 </ul>
 

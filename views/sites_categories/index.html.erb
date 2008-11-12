@@ -1,5 +1,5 @@
 <h1>Каталог интернет друзей и хороших ресурсов.</h1>
-<ul>
+<ul id="links" style="list-style-image:none; list-style-position:outside; list-style-type:none;">
   <% for sites_category in @sites_categories %>
     <li>
       <div><%= link_to h(sites_category.name), sites_category %></div>

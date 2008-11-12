@@ -14,13 +14,17 @@ class FriendSite < ActiveRecord::Base
   belongs_to :sites_category
  
   attr_protected :is_active
+  attr_accessor :remote_check
+  
   validates_associated :sites_category
-  validates_uniqueness_of :url, :admin_email, :refered_page, :allow_nil => false
+  validates_uniqueness_of :url, :refered_page, :allow_nil => false
   validates_format_of :admin_email, :with => /^(.+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => 'имеет не верный формат'
   validates_format_of :url, :with => /^http:\/\/((?:[-a-z0-9]+\.)+[a-z]{2,})/i, :message => 'имеет не верный формат'
   validates_format_of :button_url, :with => /^http:\/\/((?:[-a-z0-9]+\.)+[a-z]{2,}).*/i, :allow_blank => true, :message => 'имеет не верный формат'
   validates_format_of :refered_page, :with => /^http:\/\/((?:[-a-z0-9]+\.)+[a-z]{2,}).*/i, :message => 'имеет не верный формат'
   named_scope :active, :conditions => ['is_active = ?', true]
+  named_scope :not_active, :conditions => ['is_active = ?', false]
+  
 
   HUMANIZED_ATTRIBUTES = {
     :admin_email => 'E-mail администратора сайта ',
@@ -37,6 +41,9 @@ class FriendSite < ActiveRecord::Base
   def validate_on_create
     if self.errors.empty?
       if self.refered_page.scan(self.url)
+        #skip remote validation if set this flag
+        return true unless remote_check
+
         links = Link.new
         links.set_page(self.refered_page)
         links.link_initialize
@@ -44,6 +51,7 @@ class FriendSite < ActiveRecord::Base
         links.ext_links.each do |url|
           return true if url.scan(SITE_DOMAIN)
         end
+        
         self.errors.add_to_base('На указанной Вами странице обратной ссылки не найдено.')
       else
         self.errors.add_to_base('Ссылка нанаш русурс размещена на чужом сайте.')

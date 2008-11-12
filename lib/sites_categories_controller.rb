@@ -14,7 +14,12 @@ class SitesCategoriesController < ApplicationController
   # GET /sites_categories/1.xml
   def show
     @sites_category = SitesCategory.find(params[:id])
-
+    if is_admin? && params[:active].eql?('false')
+      @sites = @sites_category.friend_sites.not_active.paginate(:page => params[:page])
+    else
+      @sites = @sites_category.friend_sites.active.paginate(:page => params[:page])
+    end
+   # logger.debug(@sites.inspect)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @sites_category }

@@ -3,6 +3,7 @@ class CreateFriendSites < ActiveRecord::Migration
     create_table :friend_sites do |t|
       t.references :sites_category
       t.string :url, :null => false
+      t.string :title, :limit => 100, :null => false
       t.string :button_url, :null => true
       t.string :description, :default => nil
       t.string :admin_email, :null => false

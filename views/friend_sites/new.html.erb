@@ -1,4 +1,4 @@
-<h3>Добавление ресурса в раздел (<%= @category.name %>)</h3>
+<h3><%= @category.name %></h3>
 <div style="font-size: 80%">
   Перед добавлением сайта в каталог <b>разместите на своем сайте нашу кнопку или ссылку</b>.
   <div>
@@ -13,9 +13,13 @@
   иначе ссылка на ваш ресурс не будет активирована, или <i>будет деактивирована</i> когда будет больше 10 внешних ссылок.
 </div>
 
-<% form_for([@category,@friend_site]) do |f| %>
+<% form_for([@category, @friend_site]) do |f| %>
   <%= f.error_messages:header_message => 'Возникли некоторые ошибки при добавлении сайта.',
     :message => 'Для продолжения исправьте следующие ошибки.' %>
+  <p>
+    Название сайта<br />
+    <%= f.text_field :title, :size => 45 %>
+  </p>
   <p>
     URL сайта<br />
     <%= f.text_field :url, :size => 45 %>
@@ -44,4 +48,4 @@
   Разместите ссылку на своем ресурсе и отправьте все данные администрации.
 <% end %>
 
-<%= link_to 'Назад', sites_category_friend_sites_path(@category) %>
+<%= link_to('Назад', sites_category_friend_sites_path(@category)) %>

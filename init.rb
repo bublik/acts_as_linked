@@ -7,12 +7,12 @@ require 'uri'
 
 models_path = File.join(directory, 'app', 'models')
 $LOAD_PATH << models_path
-Dependencies.load_paths << models_path
+ActiveSupport::Dependencies.load_paths << models_path
 
 
 controller_path = File.join(directory, 'app', 'controllers')
 $LOAD_PATH << controller_path
-Dependencies.load_paths << controller_path
+ActiveSupport::Dependencies.load_paths << controller_path
 config.controller_paths << controller_path
 
 

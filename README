@@ -7,7 +7,7 @@ All questions send to my forum http://rubyclub.com.ua/
 Example
 =======
 Add next line to your routes.rb file
-map.resources :sites_categories, :has_many => :friend_sites
+map.resources :sites_categories, :has_many => :friend_sites,  :member => {:activate => :any}
 
 Add method +is_admin?+
 to your application_helper.rb

@@ -12,7 +12,7 @@ namespace :linked do
     CreateFriendSites.up
   end
   
-  desc "Add tables [Sites, FriendSites]"
+  desc "Remove tables [Sites, FriendSites]"
   task :migrate_down do
     CreateFriendSites.down
     CreateSitesCategories.down

@@ -1,4 +1,5 @@
 module FriendSitesHelper
+  
   def site_title
     'Site title - override site_title method this in your application_helper.rb'
   end
@@ -6,4 +7,21 @@ module FriendSitesHelper
     'Site Description - override site_title method this in your application_helper.rb'
   end
   include ApplicationHelper
+
+  def site_row(site)
+    content_tag(:dl,
+      content_tag(:dt, (image_tag(site.button_url) unless site.button_url.blank?).to_s + 
+          link_to(h(site.title), site.url, :title => site.title) +
+          (is_admin? ? manage_site_links(site) : '')) +
+          content_tag(:dd, h(site.description)), :class => 'pad5')
+  end
+
+  def manage_site_links(site)
+    st = (site.is_active ? 'deactivate' : 'activate')
+     resp = link_to(st, friend_site_activate_path(site, st)) +  
+      ' | ' + link_to('edit', edit_sites_category_friend_site_path(site.sites_category_id, site)) +
+      ' | ' + link_to('destroy', sites_category_friend_site_path(site.sites_category_id, site), :confirm => 'Are you sure?', :method => :delete ) 
+   content_tag(:div, "#{site.admin_email}  [#{resp}] #{site.refered_page}")
+  end
+
 end

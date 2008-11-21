@@ -22,7 +22,7 @@ module FriendSitesHelper
       ' | ' + link_to_remote('пров.', :url => friend_site_remote_validation_path(site)) +
       ' | ' + link_to('ред.', edit_sites_category_friend_site_path(site.sites_category_id, site)) +
       ' | ' + link_to('удал.', sites_category_friend_site_path(site.sites_category_id, site), :confirm => 'Are you sure?', :method => :delete ) 
-   content_tag(:span, " [#{resp}]  #{mail_to(site.admin_email)} #{link_to(site.refered_page)} ", :style => 'font-size: 80%')
+   content_tag(:span, " [#{resp}]  #{mail_to(site.admin_email)} #{link_to(site.refered_page, site.refered_page)} ", :style => 'font-size: 80%')
   end
 
 end

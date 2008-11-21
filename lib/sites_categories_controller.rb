@@ -2,7 +2,8 @@ class SitesCategoriesController < ApplicationController
   # GET /sites_categories
   # GET /sites_categories.xml
   def index
-    @sites_categories = SitesCategory.find(:all)
+    @sites_categories = SitesCategory.find(:all, :order => 'name ASC')
+    @waiting_sites = FriendSite.not_active.all if is_admin?
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +20,7 @@ class SitesCategoriesController < ApplicationController
     else
       @sites = @sites_category.friend_sites.active.paginate(:page => params[:page])
     end
-   # logger.debug(@sites.inspect)
+    # logger.debug(@sites.inspect)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @sites_category }

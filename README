@@ -1,10 +1,13 @@
 ActsAsLinked
 ============
 Links exchange system for thematicks sites with youe site.
+Administrator can check by clicking a link on the site which communicates links
+Link will be automatically disabled elsi links to friendly resource will not be found.
+
 All questions send to my forum http://rubyclub.com.ua/
+Examplmple using plugin http://nikon-club.com.ua/sites_categories
 
 
-Example
 =======
 Add next line to your routes.rb file
 
